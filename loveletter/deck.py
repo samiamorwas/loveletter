@@ -1,6 +1,8 @@
 from importlib import import_module
 from random import shuffle
 
+import utils
+
 
 class Deck:
     """A representation of a deck of cards.
@@ -37,8 +39,8 @@ class Deck:
 
     def __str__(self):
         """Print each card in the deck."""
-        card_names = ', '.join(str(card) for card in self.cards)
-        return '{0}:<{1}>'.format(type(self).__name__, card_names)
+        readable_cards = utils.get_readable_cards(self.cards)
+        return '{0}:<{1}>'.format(type(self).__name__, readable_cards)
 
     def draw(self):
         """Draw the top card of the deck."""
