@@ -1,4 +1,4 @@
-from cards.base_card import BaseCard
+from .base_card import BaseCard
 
 
 class Handmaid(BaseCard):

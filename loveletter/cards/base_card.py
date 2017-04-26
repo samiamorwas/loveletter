@@ -11,4 +11,4 @@ class BaseCard(metaclass=abc.ABCMeta):
 
     def __str__(self):
         """Use the class name as the name of the card."""
-        return type(self).__name__ + ':' + str(self.rank)
+        return '{0}({1})'.format(type(self).__name__, self.rank)
