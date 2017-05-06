@@ -1,7 +1,7 @@
 from importlib import import_module
 from random import shuffle
 
-import utils
+from . import utils
 
 
 class Deck:
@@ -27,7 +27,7 @@ class Deck:
 
         # Get the classes for all card types.
         for card_type in self._counts.keys():
-            module = import_module('cards.' + card_type)
+            module = import_module('.cards.' + card_type, __package__)
             classes[card_type] = getattr(module, card_type.capitalize())
 
         for card_type, count in self._counts.items():
@@ -39,9 +39,12 @@ class Deck:
 
     def __str__(self):
         """Print each card in the deck."""
-        readable_cards = utils.get_readable_cards(self.cards)
-        return '{0}:<{1}>'.format(type(self).__name__, readable_cards)
+        return '<{0}>'.format(utils.get_readable_list(self.cards))
 
     def draw(self):
         """Draw the top card of the deck."""
         return self.cards.pop()
+
+    def is_empty(self):
+        """Check if the deck is empty."""
+        return not bool(self.cards)
