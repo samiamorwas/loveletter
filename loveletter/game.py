@@ -24,12 +24,18 @@ class Game:
         return 'Players: {0}\nDeck: {1}'.format(players, self.deck)
 
     def _get_winner(self):
+        """Get the winner.
+
+        If there is only one player left, that player wins. Otherwise, the
+        player with the highest value card wins.
+        """
         if len(self.players) == 1:
             return self.players.pop()
 
         return sorted(self.players, key=lambda player: player.get_hand_rank()).pop()
 
     def _check_is_over(self):
+        """Check if the deck is empty, or there is only one player left."""
         return self.deck.is_empty() or len(self.players) == 1
 
     def play(self):
